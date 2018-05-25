@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "EventView";
+}
+
+<h2>EventView</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="table_data" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>Event Type</th>
+                    <th>Event Vanues</th>
+                    <th>Event Title</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Registration Max Time</th>
+                    <th>Published</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            debugger;
+            var _url = "/EventDetails/EventViewJson";
+            $.ajax({
+                url: _url,
+                data: {},
+                method: "POST"
+            }).done(function (data) {
+
+                if (data != null) {
+                    getData(data);
+                }
+
+            }).fail(function() {
+                alert('fail');
+            });
+        });
+
+        function getData(data) {
+            for (var i = 0; i < data.length ; i++) {
+                var item = data[i];
+                var _row = "<tr>"
+                        + "<td>" + item.EventDetailsId + "</td>"
+                        + "<td>" + item.EventTypeId + "</td>"
+                        + "<td>" + item.EventVanueId + "</td>"
+                        + "<td>" + item.EventTitle + "</td>"
+                        + "<td>" + item.EventStartTime + "</td>"
+                        + "<td>" + item.EventEndTime + "</td>"
+                        + "<td>" + item.EventMaxTime + "</td>"
+                        + "<td>"+item.IsActive+ "</td>"
+                    + "</tr>";
+
+                var _table = $("#table_data tbody");
+                _table.append(_row);
+            }
+            
+        }
+    </script>
+}
+
+

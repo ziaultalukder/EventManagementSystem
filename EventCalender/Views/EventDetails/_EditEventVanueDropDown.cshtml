@@ -1,0 +1,9 @@
+﻿@model EventCalender.ViewModels.EventVanuesDropDownViewModels
+
+<div class="form-group">
+    @Html.LabelFor(model => model.EventVanueId, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.EventVanueId, new SelectList(Model.EventVanues, "EventVanueId", "EventVanueName", Model.EventVanueId),  new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EventVanueId, "", new { @class = "text-danger" })
+    </div>
+</div>

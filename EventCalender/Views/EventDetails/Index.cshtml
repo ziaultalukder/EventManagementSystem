@@ -1,0 +1,91 @@
+﻿@model IEnumerable<EventCalender.Models.EventDetails>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventVanueId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventStartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventEndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventMaxTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.Raw("Publish")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventVanueId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventStartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventEndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventMaxTime)
+        </td>
+        <td>
+            @if (item.IsActive)
+            {
+                @Html.Raw("Yes")
+                ;
+            }
+            else
+            {
+                @Html.Raw("No")
+                ;
+            }
+        </td>
+        <td>
+            @if (item.IsActive)
+            {
+                @Html.ActionLink("Publish", "Published", "EventDetails", new {id=item.EventDetailsId}, new {@class="btn btn-default"})
+            }
+            else
+            {
+                @Html.ActionLink("UnPublish", "Published", "EventDetails", new { id = item.EventDetailsId }, new { @class = "btn btn-default" })
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EventDetailsId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EventDetailsId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EventDetailsId })
+        </td>
+    </tr>
+}
+
+</table>
